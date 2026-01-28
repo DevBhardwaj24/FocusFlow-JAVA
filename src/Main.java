@@ -1,8 +1,3 @@
-//Task 1: is to define the class i want
-// the feature i want are taskID and task desc.
-
-//Task 2 is to make a Task manager class to handle all that stuff
-
 import java.util.*;
 
 
@@ -18,28 +13,32 @@ class Task{
 
 class TaskManager{
 
-
-    // need to make a list of task. that contains id and desc. of task
     List<Task> tasks=new ArrayList<>();
+    int count=1;
 
-    // fun to add the task
-    void addTask(int taskID,String taskDesc){
-        tasks.add(new Task(taskID,taskDesc));
+
+    void addTask(String taskDesc) {
+        Task t = new Task(count, taskDesc);
+        tasks.add(t);
+        count++;
     }
 
-    // to display all the task
+
     List<Task> displayTask(){
         return tasks;
 
     }
 }
 
+class Menu{
+    TaskManager manager;
+    Scanner sc=new Scanner(System.in);
 
-public class Main {
-    public static void main(String[] args) {
-        TaskManager manager=new TaskManager();
-        Scanner sc=new Scanner(System.in);
+    public Menu(TaskManager manager){
+        this.manager=manager;
+    }
 
+    void start(){
         while(true){
             System.out.println("=== To Do App ===");
             System.out.println("Enter your choice :");
@@ -49,12 +48,10 @@ public class Main {
             int choice=sc.nextInt();
 
             if(choice==1){
-                System.out.print("Enter the Task ID: ");
-                int id=sc.nextInt();
                 sc.nextLine();
                 System.out.print("Enter the Task Description: ");
                 String desc=sc.nextLine();
-                manager.addTask(id,desc);
+                manager.addTask(desc);
                 System.out.println("Your task added successfully. ");
             } else if (choice==2) {
                 for(Task t: manager.displayTask()){
@@ -65,6 +62,18 @@ public class Main {
                 break;
             }
         }
+    }
+
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        TaskManager manager=new TaskManager();
+        Menu menu=new Menu(manager);
+        menu.start();
+
+
 
 
     }
