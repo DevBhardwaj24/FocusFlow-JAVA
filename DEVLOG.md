@@ -10,4 +10,8 @@
 - Refactored main method
 - Added the auto counter for task id instead of manually adding 
 
+## Day 3
+- CRUD completion
+- Add Delete & Update Task by ID
+- TaskManager now fully manages task lifecycle
 

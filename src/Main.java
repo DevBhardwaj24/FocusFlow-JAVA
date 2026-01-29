@@ -9,7 +9,20 @@ class Task{
         this.taskID=taskID;
         this.taskDesc =taskDesc;
     }
+
+    public int getTaskID(){
+        return taskID;
+    }
+
+    public String getTaskDesc(){
+        return taskDesc;
+    }
+
+    public void setTaskDesc(String taskDesc) {
+        this.taskDesc = taskDesc;
+    }
 }
+
 
 class TaskManager{
 
@@ -21,6 +34,14 @@ class TaskManager{
         Task t = new Task(count, taskDesc);
         tasks.add(t);
         count++;
+    }
+
+    public boolean deleteTask(int taskID){
+        return tasks.removeIf(task -> task.getTaskID()==taskID);
+    }
+
+    void UpdateTask(int taskID){
+        //do it tomorrow
     }
 
 
@@ -44,7 +65,8 @@ class Menu{
             System.out.println("Enter your choice :");
             System.out.println("1. Add Task");
             System.out.println("2. View Task");
-            System.out.println("3. Exit");
+            System.out.println("3. Delete Task");
+            System.out.println("4. Exit");
             int choice=sc.nextInt();
 
             if(choice==1){
@@ -55,9 +77,15 @@ class Menu{
                 System.out.println("Your task added successfully. ");
             } else if (choice==2) {
                 for(Task t: manager.displayTask()){
-                    System.out.println(t.taskID+" - "+ t.taskDesc);
+                    System.out.println("ID: "+t.taskID+" - "+ t.taskDesc);
                 }
 
+            } else if (choice==3) {
+                sc.nextLine();
+                System.out.print("Enter the task ID you want to delete: ");
+                int id=sc.nextInt();
+                manager.deleteTask(id);
+                System.out.println("Your task deleted successfully.");
             }else{
                 break;
             }
